@@ -4,12 +4,11 @@ let s:drawerName = "__Markdown_Drawer__"
 let s:outline = []
 
 function! OpenMarkdownDrawer()
+
     " Save first
     write
 
-    call CreateOutline()
-
-    let l:filename = expand('%:t')
+    call MarkdownLevel()
 
     " Prevent multiple versions of the Drawer
     if !ReuseWindow()
@@ -17,10 +16,10 @@ function! OpenMarkdownDrawer()
     else
         execute bufwinnr(s:drawerName) . 'wincmd w'
     endif
-    normal! ggdG
 
-    call append(0, ["Outline of" . " " . l:filename] + CreateTree())
-    setlocal readonly nomodifiable
+    setlocal noreadonly modifiable
+    normal! ggdG
+    call append(0, CreateTree())
 
 endfunction
 
@@ -46,11 +45,9 @@ function! ReuseWindow()
     return 0
 endfunction
 
-function! CreateOutline()
-    call MarkdownLevel()
-endfunction
-
 function! MarkdownLevel()
+    let found = 0
+    let currline = line('.')
     let pat = '^#\+'
     let numOfLines = line('$')
     let i = 1
@@ -58,7 +55,12 @@ function! MarkdownLevel()
        let line = getline(i)
        let h = matchend(line, pat)
        if h > 0
-           call add(s:outline, {'lineNum': i, 'header': strcharpart(line, h+1)})
+           let basic = {'lineNum': i, 'active': 0, 'header': strcharpart(line, h+1)}
+           if i >= currline && found ==? 0
+                let basic.active = 1
+                let found = 1
+           endif
+           call add(s:outline, basic)
        endif
        let i += 1
     endwhile
