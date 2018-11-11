@@ -2,10 +2,11 @@
 
 let s:drawerName = "__Markdown_Drawer__"
 let s:outline = []
+let s:file = ""
 
 function! OpenMarkdownDrawer()
+    let s:file = bufname("%")
 
-    " Save first
     write
 
     call MarkdownLevel()
@@ -20,6 +21,9 @@ function! OpenMarkdownDrawer()
     setlocal noreadonly modifiable
     normal! ggdG
     call append(0, CreateTree())
+
+    setlocal readonly nomodifiable
+
     let l:i = 0
     let l:goto = 0
     while i < len(s:outline)
@@ -29,6 +33,9 @@ function! OpenMarkdownDrawer()
         let l:i += 1
     endwhile
     execute "normal! " . l:goto . "G"
+
+    exec 'nnoremap <buffer> <silent> o :call GoTo()<cr>'
+
 endfunction
 
 
@@ -79,6 +86,12 @@ function! CreateTree()
         call add(list, i.header)
     endfor
     return list
+endfunction
+
+function! GoTo()
+    let l = s:outline[line('.') - 1].fileLineNum
+    execute bufwinnr(s:file) . 'wincmd w'
+    execute "normal! " . l . "G"
 endfunction
 
 noremap <buffer> <localleader>r :call OpenMarkdownDrawer()<cr>
