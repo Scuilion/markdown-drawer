@@ -4,14 +4,12 @@ let s:drawerName = "__Markdown_Drawer__"
 let s:outline = []
 
 function! OpenMarkdownDrawer()
-    let s:outline = []
     " Save first
     write
 
     call CreateOutline()
 
     let l:filename = expand('%:t')
-    " Insert tree
 
     " Prevent multiple versions of the Drawer
     if !ReuseWindow()
@@ -19,10 +17,19 @@ function! OpenMarkdownDrawer()
     else
         execute bufwinnr(s:drawerName) . 'wincmd w'
     endif
-
     normal! ggdG
-    call append(0, ["Outline of" . " " . l:filename] + s:outline)
 
+    call append(0, ["Outline of" . " " . l:filename] + CreateTree())
+    setlocal readonly nomodifiable
+
+endfunction
+
+function! CreateTree()
+    let list = []
+    for i in s:outline
+        call add(list, i.header)
+    endfor
+    return list
 endfunction
 
 function! CreateNewWindow()
@@ -33,14 +40,9 @@ function! CreateNewWindow()
 endfunction
 
 function! ReuseWindow()
-    let l:path = expand('%:p')
-
-    let l:buff = bufwinnr(s:drawerName)
-
-    if l:buff != -1
+    if bufwinnr(s:drawerName) != -1
         return 1
     endif
-
     return 0
 endfunction
 
@@ -49,19 +51,17 @@ function! CreateOutline()
 endfunction
 
 function! MarkdownLevel()
-    let l:headers = []
-    let l:numOfLines = line('$')
-    echom l:numOfLines
-    let l:c = 1
-    while c <= numOfLines
-       let h = matchstr(getline(c), '^#\+')
-       echom h
-       if !empty(h)
-           call add(l:headers, c)
+    let pat = '^#\+'
+    let numOfLines = line('$')
+    let i = 1
+    while i <= numOfLines
+       let line = getline(i)
+       let h = matchend(line, pat)
+       if h > 0
+           call add(s:outline, {'lineNum': i, 'header': strcharpart(line, h+1)})
        endif
-       let c += 1
+       let i += 1
     endwhile
-    echom string(l:headers)
 endfunction
 
 noremap <buffer> <localleader>r :call OpenMarkdownDrawer()<cr>
