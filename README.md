@@ -1,1 +1,3 @@
-:help internal-variables
+
+Relys on built in vim markdown folding
+
