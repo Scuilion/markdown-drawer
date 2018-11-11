@@ -61,9 +61,9 @@ function! MarkdownLevel()
     let i = 1
     while i <= numOfLines
        let line = getline(i)
-       let h = matchend(line, pat)
-       if h > 0
-           call add(s:outline, {'fileLineNum': i, 'active': 0, 'header': repeat(' ', h-1) . strcharpart(line, h+1)})
+       let divide = matchend(line, pat)
+       if divide > 0
+           call add(s:outline, {'fileLineNum': i, 'active': 0, 'header':  _HeaderName(line, divide) })
        endif
        let i += 1
     endwhile
@@ -78,6 +78,15 @@ function! MarkdownLevel()
         endif
         let i -= 1
     endwhile
+endfunction
+
+function! _HeaderName(line, divide)
+    let h = strcharpart(a:line, a:divide + 1)
+    echom match('^\s+$', h)
+    if match('^\s+$', h) >= 0
+        let h = '<no header>'
+    endif
+    return repeat(' ', a:divide - 1) . h
 endfunction
 
 function! CreateTree()
