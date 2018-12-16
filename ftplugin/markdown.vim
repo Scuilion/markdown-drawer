@@ -54,7 +54,7 @@ function! ReuseWindow()
 endfunction
 
 function! _IsFenced(line)
-  let fen = matchstr(a:line, '^\s*`\{3}')
+  let fen = matchstr(a:line, '\m\C^\s*`\{3}')
   if !empty(fen) && s:is == 0
     let s:is = 1
   elseif !empty(fen) && s:is == 1
@@ -65,7 +65,7 @@ endfunction
 
 function! MarkdownLevel()
   let outline = []
-  let pat = '^#\+'
+  let pat = '\m\C^#\+'
   let numOfLines = line('$')
   let i = 1
   while i <= numOfLines

@@ -16,9 +16,7 @@ Given markdown (a simple markdown file):
   multiple line
 
 Execute(MarkdownLevel):
-  Log g:vader_file
   let actual = MarkdownLevel()
-  Log len(actual)
   Assert len(actual) == 6
 
 Then (only one row should be marked active):
@@ -43,6 +41,11 @@ Given markdown (a markdown file with fencing):
 
 Execute(Hash symbol in fenced code should be ignored):
   let actual = MarkdownLevel()
-  Log actual
   Assert len(actual) == 2
 
+Given markdown (a mardown file with missing title text):
+  ### 
+
+Execute(default header will be substituted):
+  let actual = MarkdownLevel()
+  Assert actual[0].header == '  <no header>'
