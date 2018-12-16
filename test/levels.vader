@@ -15,8 +15,8 @@ Given markdown (a simple markdown file):
   Some lorem Ipsum with
   multiple line
 
-Execute(MarkdownLevel):
-  let actual = MarkdownLevel()
+Execute (MarkdownLevel):
+  let actual = levels#MarkdownLevel()
   Assert len(actual) == 6
 
 Then (only one row should be marked active):
@@ -39,13 +39,26 @@ Given markdown (a markdown file with fencing):
   ``` 
   # Second Title
 
-Execute(Hash symbol in fenced code should be ignored):
-  let actual = MarkdownLevel()
+Execute (Hash symbol in fenced code should be ignored):
+  let actual = levels#MarkdownLevel()
   Assert len(actual) == 2
 
 Given markdown (a mardown file with missing title text):
   ### 
 
-Execute(default header will be substituted):
-  let actual = MarkdownLevel()
+Execute (default header will be substituted):
+  let actual = levels#MarkdownLevel()
   Assert actual[0].header == '  <no header>'
+
+Given markdown (an empty file):
+Execute (empty file does not blow up):
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 0
+
+Given markdown (no headers):
+  some text
+
+Execute (no headers does not blow up):
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 0
+  
