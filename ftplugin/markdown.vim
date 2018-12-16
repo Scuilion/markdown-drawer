@@ -3,6 +3,7 @@
 let s:drawerName = "__Markdown_Drawer__"
 let s:outline = []
 let s:file = ""
+let s:is = 0
 
 function! OpenMarkdownDrawer()
   let s:file = bufname("%")
@@ -52,8 +53,14 @@ function! ReuseWindow()
   return 0
 endfunction
 
-function! _IsFenced()
-  let fen = '^\s*`{3}'
+function! _IsFenced(line)
+  let fen = matchstr(a:line, '^\s*`\{3}')
+  if !empty(fen) && s:is == 0
+    let s:is = 1
+  elseif !empty(fen) && s:is == 1
+    let s:is = 0
+  endif
+  return s:is
 endfunction
 
 function! MarkdownLevel()
@@ -63,9 +70,11 @@ function! MarkdownLevel()
   let i = 1
   while i <= numOfLines
     let line = getline(i)
-    let divide = matchend(line, pat)
-    if divide > 0
-      call add(outline, {'fileLineNum': i, 'active': 0, 'header':  _HeaderName(line, divide) })
+    if _IsFenced(line) == 0
+      let divide = matchend(line, pat)
+      if divide > 0
+        call add(outline, {'fileLineNum': i, 'active': 0, 'header':  _HeaderName(line, divide) })
+      endif
     endif
     let i += 1
   endwhile

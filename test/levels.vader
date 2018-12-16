@@ -18,18 +18,19 @@ Given markdown (a simple markdown file):
 Execute(MarkdownLevel):
   Log g:vader_file
   let actual = MarkdownLevel()
+  Log len(actual)
   Assert len(actual) == 6
 
 Then (only one row should be marked active):
   let i = 0
   let activeCount = 0
-  while i<= len(actual) -1
+  while i<= len(actual) - 1
     if actual[i].active == 1
       let activeCount = activeCount + 1
     endif
     let i = i+1
   endwhile
-  Assert activeCount == 2
+  Assert activeCount == 1
 
 Given markdown (a markdown file with fencing):
   # First Title
@@ -42,5 +43,6 @@ Given markdown (a markdown file with fencing):
 
 Execute(Hash symbol in fenced code should be ignored):
   let actual = MarkdownLevel()
-  "Assert len(actual) == 2
+  Log actual
+  Assert len(actual) == 2
 
