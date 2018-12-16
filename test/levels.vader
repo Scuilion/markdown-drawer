@@ -1,0 +1,46 @@
+Given markdown (a simple markdown file):
+  # Main Title
+      something
+  ### First Sub
+      else
+      multi
+  #### Second Second
+
+  # Second Main
+  A list
+  - one
+  - two
+  ###
+  ## First of Second
+  Some lorem Ipsum with
+  multiple line
+
+Execute(MarkdownLevel):
+  Log g:vader_file
+  let actual = MarkdownLevel()
+  Assert len(actual) == 6
+
+Then (only one row should be marked active):
+  let i = 0
+  let activeCount = 0
+  while i<= len(actual) -1
+    if actual[i].active == 1
+      let activeCount = activeCount + 1
+    endif
+    let i = i+1
+  endwhile
+  Assert activeCount == 2
+
+Given markdown (a markdown file with fencing):
+  # First Title
+  ``` 
+  #!/usr/bin/env bash
+  #A comment
+  cat foo.txt
+  ``` 
+  # Second Title
+
+Execute(Hash symbol in fenced code should be ignored):
+  let actual = MarkdownLevel()
+  "Assert len(actual) == 2
+
