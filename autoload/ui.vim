@@ -31,14 +31,14 @@ function! ui#OpenMarkdownDrawer()
     let l:i += 1
   endwhile
   execute "normal! " . l:goto . "G"
-
-  exec 'nnoremap <buffer> <silent> o :call GoTo()<cr>'
+  execute 'nnoremap <buffer> <silent> '. g:markdrawerGoto . ' :call GoTo()<cr>'
 
 endfunction
 
 function! CreateNewWindow()
   execute "vsplit" s:drawerName
   vertical resize 25
+  set winfixwidth
   setlocal filetype=markdowndrawer
   setlocal buftype=nofile
 endfunction

@@ -30,7 +30,7 @@ function! HeaderName(line, divide)
   if match('\m\C^\s+$', h) >= 0
     let h = '<no header>'
   endif
-  return repeat(g:markdrawer_prefix, a:divide - 1) . h
+  return repeat(g:markdrawerPrefix, a:divide - 1) . h
 endfunction
 
 function! IsFenced(line)
