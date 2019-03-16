@@ -3,7 +3,7 @@ let s:outline = []
 let s:file = ""
 
 function! ui#OpenMarkdownDrawer()
-  let s:file = bufname("%")
+  let s:file = expand("%:p")
 
   write
 
@@ -30,7 +30,9 @@ function! ui#OpenMarkdownDrawer()
     endif
     let l:i += 1
   endwhile
+
   execute "normal! " . l:goto . "G"
+  execute 'nnoremap <buffer> <silent> '. g:markdrawerPasteBelow . ' :call PasteBelow()<cr>'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerGoto . ' :call GoTo()<cr>'
 
 endfunction
@@ -43,6 +45,7 @@ function! CreateNewWindow()
   setlocal buftype=nofile
 endfunction
 
+" if the drawer is already opened
 function! ReuseWindow()
   if bufwinnr(s:drawerName) != -1
     return 1
@@ -64,4 +67,14 @@ function! GoTo()
   execute "normal! " . l . "G"
 endfunction
 
+function! Delete()
+  let i = line('.') -1
+  let s:dStart = s:outline[i].fileLineNum 
+  let s:dEnd = s:outline[i + 1].fileLineNum
+endfunction
 
+function! PasteBelow()
+  if exists("s:dStart") && exits("s:dEnd")
+    bufwinnr(s:file) . 'wincmd w'    
+  endif
+endfunction

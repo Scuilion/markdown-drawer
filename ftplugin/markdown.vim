@@ -6,16 +6,12 @@ if !exists("g:markdrawerGoto")
     let g:markdrawerGoto = "o"
 endif
 
-if !exists("g:markdrawerYank")
-    let g:markdrawerYank = "Y"
+if !exists("g:markdrawerDelete")
+    let g:markdrawerYank = "D"
 endif
 
 if !exists("g:markdrawerPasteBelow")
     let g:markdrawerPasteBelow = "p"
-endif
-
-if !exists("g:markdrawerPasteAbove")
-    let g:markdrawerPasteAbove = "P"
 endif
 
 noremap <buffer> <leader>md :call ui#OpenMarkdownDrawer()<cr>
