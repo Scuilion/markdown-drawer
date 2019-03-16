@@ -85,5 +85,6 @@ function! PasteBelow()
     execute bufwinnr(s:file) . 'wincmd w'    
     execute s:dStart . "," . s:dEnd . "m " . l:to
     write
+    call ui#OpenMarkdownDrawer()
   endif
 endfunction
