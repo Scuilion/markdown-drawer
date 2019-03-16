@@ -18,6 +18,7 @@ function! ui#OpenMarkdownDrawer()
     execute bufwinnr(s:drawerName) . 'wincmd w'
   endif
 
+  " Redraw outline
   setlocal noreadonly modifiable
   normal! ggdG
   call append(0, CreateTree())
@@ -36,7 +37,7 @@ function! ui#OpenMarkdownDrawer()
 
   " removing all markers from first header does not set active flag
   if l:goto == 0
-    l:goto = 1
+    let l:goto = 1
   endif
 
   execute "normal! " . l:goto . "G"
@@ -65,11 +66,11 @@ function! ReuseWindow()
 endfunction
 
 function! CreateTree()
-  let list = []
+  let l:list = []
   for i in s:outline
-    call add(list, i.header)
+    call add(l:list, i.header)
   endfor
-  return list
+  return l:list
 endfunction
 
 " Finds the where to place cursor base off the outline 
@@ -82,11 +83,11 @@ function! GoTo()
 endfunction
 
 function! Delete()
-  let i = line('.')-1
+  let l:i = line('.')-1
   let s:dStart = s:outline[i].fileLineNum 
   let s:dEnd = s:fileLength
-  if len(s:outline) > i + 1
-    let s:dEnd = s:outline[i + 1].fileLineNum - 1
+  if len(s:outline) > l:i + 1
+    let s:dEnd = s:outline[l:i + 1].fileLineNum - 1
   endif
 endfunction
 
@@ -105,8 +106,7 @@ endfunction
 
 function! Increase() 
   let l:l =  GoTo()
-  let hCount = matchend(getline(l:l), '\m\C^#\+')
-  if hCount < 6
+  if matchend(getline(l:l), '\m\C^#\+') < 6
     execute "normal! I#"
   endif
   call ui#OpenMarkdownDrawer()
@@ -114,8 +114,7 @@ endfunction
 
 function! Decrease() 
   let l:l =  GoTo()
-  let hCount = matchend(getline(l:l), '\m\C^#\+')
-  if hCount > 0
+  if matchend(getline(l:l), '\m\C^#\+') > 0
     execute "s/^#//"
   endif
   call ui#OpenMarkdownDrawer()

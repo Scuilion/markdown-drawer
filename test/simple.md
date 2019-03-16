@@ -3,7 +3,7 @@
 ### First Sub
     First paragraph
 ```viml
-" Prevent multiple versions of the Drawer
+" Used for fenced code test
 if !ReuseWindow()
     call CreateNewWindow()
 else
