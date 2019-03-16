@@ -14,4 +14,12 @@ if !exists("g:markdrawerPasteBelow")
     let g:markdrawerPasteBelow = "p"
 endif
 
+if !exists("g:markdrawerIncrease")
+    let g:markdrawerIncrease = "+"
+endif
+
+if !exists("g:markdrawerDecrease")
+    let g:markdrawerDecrease = "-"
+endif
+
 noremap <buffer> <leader>md :call ui#OpenMarkdownDrawer()<cr>
