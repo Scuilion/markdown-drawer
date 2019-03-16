@@ -81,7 +81,11 @@ endfunction
 
 function! PasteBelow()
   if exists("s:dStart") && exists("s:dEnd")
-    let l:to = s:outline[line('.')-1].fileLineNum
+    let l:to = s:fileLength
+    if len(s:outline) > line('.')
+      let l:to = s:outline[line('.')].fileLineNum - 1
+    endif
+
     execute bufwinnr(s:file) . 'wincmd w'    
     execute s:dStart . "," . s:dEnd . "m " . l:to
     write
