@@ -1,3 +1,6 @@
+" Maintainer:   Kevin O'Neal oneal.kevin@gmail.com
+" Version:      0.1
+
 if !exists("g:markdrawerPrefix")
     let g:markdrawerPrefix = " "
 endif

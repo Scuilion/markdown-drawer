@@ -104,7 +104,7 @@ function! PasteBelow()
   endif
 endfunction
 
-function! Increase() 
+function! Decrease() 
   let l:l =  GoTo()
   if matchend(getline(l:l), '\m\C^#\+') < 6
     execute "normal! I#"
@@ -112,7 +112,7 @@ function! Increase()
   call ui#OpenMarkdownDrawer()
 endfunction
 
-function! Decrease() 
+function! Increase() 
   let l:l =  GoTo()
   if matchend(getline(l:l), '\m\C^#\+') > 0
     execute "s/^#//"
