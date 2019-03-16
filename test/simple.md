@@ -1,8 +1,14 @@
 # Main Title
     Main title text
 ### First Sub
-    One paragraph
-    Two paragraph
+    First paragraph
+```viml
+" Prevent multiple versions of the Drawer
+if !ReuseWindow()
+    call CreateNewWindow()
+else
+```
+    Next paragraph
 ### Second Sub Empty
 
 ## Moving
