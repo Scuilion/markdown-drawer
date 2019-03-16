@@ -1,9 +1,11 @@
 let s:drawerName = "__Markdown_Drawer__"
 let s:outline = []
 let s:file = ""
+let s:fileLength = 0
 
 function! ui#OpenMarkdownDrawer()
   let s:file = expand("%:p")
+  let s:fileLength = line('$')
 
   write
 
@@ -32,6 +34,7 @@ function! ui#OpenMarkdownDrawer()
   endwhile
 
   execute "normal! " . l:goto . "G"
+  execute 'nnoremap <buffer> <silent> '. g:markdrawerDelete . ' :call Delete()<cr>'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerPasteBelow . ' :call PasteBelow()<cr>'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerGoto . ' :call GoTo()<cr>'
 
@@ -68,13 +71,19 @@ function! GoTo()
 endfunction
 
 function! Delete()
-  let i = line('.') -1
+  let i = line('.')-1
   let s:dStart = s:outline[i].fileLineNum 
-  let s:dEnd = s:outline[i + 1].fileLineNum
+  let s:dEnd = s:fileLength
+  if len(s:outline) > i + 1
+    let s:dEnd = s:outline[i + 1].fileLineNum - 1
+  endif
 endfunction
 
 function! PasteBelow()
-  if exists("s:dStart") && exits("s:dEnd")
-    bufwinnr(s:file) . 'wincmd w'    
+  if exists("s:dStart") && exists("s:dEnd")
+    let l:to = s:outline[line('.')-1].fileLineNum
+    execute bufwinnr(s:file) . 'wincmd w'    
+    execute s:dStart . "," . s:dEnd . "m " . l:to
+    write
   endif
 endfunction

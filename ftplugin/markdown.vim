@@ -7,7 +7,7 @@ if !exists("g:markdrawerGoto")
 endif
 
 if !exists("g:markdrawerDelete")
-    let g:markdrawerYank = "D"
+    let g:markdrawerDelete = "D"
 endif
 
 if !exists("g:markdrawerPasteBelow")
