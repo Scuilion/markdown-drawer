@@ -22,7 +22,12 @@ Simplify navigation in large markdown files.
     let g:markdrawerPasteBelow = "p"
     let g:markdrawerIncrease = "+"
     let g:markdrawerDecrease = "-"
-    ```
+```
+
+* Set the maxium number of levels to display:
+    ```vim
+    let g:markdown_drawer_max_levels
+```
 
 ### License
 MIT
