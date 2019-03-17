@@ -73,6 +73,17 @@ function! CreateTree()
   return l:list
 endfunction
 
+" refresh the tree after setting a new level
+function! ui#MarkDrawerLevelSet(args) 
+  if a:args =~# '[^0-9]'
+     echom 'Not a number: ' . a:args
+     return
+  endif
+  let g:markdown_drawer_max_levels=a:args
+  call GoTo()
+  call ui#OpenMarkdownDrawer()
+endfunction
+
 " Finds the where to place cursor base off the outline 
 " and returns that line number
 function! GoTo()
