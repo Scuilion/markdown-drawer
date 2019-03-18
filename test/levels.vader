@@ -62,3 +62,12 @@ Execute (no headers does not blow up):
   let actual = levels#MarkdownLevel()
   Assert len(actual) == 0
   
+Given markdown (two levels):
+  # first
+  ## second
+
+Execute (set header level to one):
+  let g:markdown_drawer_max_levels=1
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 1
+

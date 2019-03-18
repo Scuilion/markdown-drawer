@@ -24,5 +24,13 @@ Simplify navigation in large markdown files.
     let g:markdrawerDecrease = "-"
     ```
 
+* Set the maximum number of levels to display:
+    ```vim
+    let g:markdown_drawer_max_levels = 4
+    ```
+
+### Commands
+* `:MarkDrawerLevelSet 3` set the max level to display
+
 ### License
 MIT

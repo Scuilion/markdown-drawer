@@ -42,7 +42,9 @@ endfunction
 
 function! Header(outline, line, lNum) 
   let l:hCount = matchend(a:line, '\m\C^#\+')
-  if l:hCount > 0
+  let l:max_levels = get(g:, 'markdown_drawer_max_levels', 6)
+
+  if l:hCount > 0 && l:hCount <= l:max_levels
     call add(a:outline, {'fileLineNum': a:lNum, 'active': 0, 'header':  HeaderName(a:line, l:hCount) })
   endif
 endfunction
