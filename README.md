@@ -23,6 +23,10 @@ Simplify navigation in large markdown files.
     let g:markdrawerIncrease = "+"
     let g:markdrawerDecrease = "-"
     ```
+Map key to open drawer:
+```
+nnoremap <Leader>md :MarkDrawer<cr>
+```
 
 * Set the maximum number of levels to display:
     ```vim
@@ -30,6 +34,8 @@ Simplify navigation in large markdown files.
     ```
 
 ### Commands
+
+* `:MarkDrawer` activate plugin
 * `:MarkDrawerLevelSet 3` set the max level to display
 
 ### License

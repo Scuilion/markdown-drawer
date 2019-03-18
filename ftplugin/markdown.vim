@@ -25,6 +25,5 @@ if !exists("g:markdrawerDecrease")
     let g:markdrawerDecrease = "-"
 endif
 
+command! MarkDrawer :call ui#OpenMarkdownDrawer()
 command! -nargs=1 MarkDrawerLevelSet :call ui#MarkDrawerLevelSet(<q-args>)
-
-noremap <buffer> <leader>md :call ui#OpenMarkdownDrawer()<cr>
