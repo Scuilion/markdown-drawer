@@ -13,6 +13,10 @@ if !exists("g:markdrawerDelete")
     let g:markdrawerDelete = "D"
 endif
 
+if !exists("g:markdrawerWidth")
+    let g:markdrawerWidth = "25"
+endif
+
 if !exists("g:markdrawerPasteBelow")
     let g:markdrawerPasteBelow = "p"
 endif

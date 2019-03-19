@@ -51,7 +51,7 @@ endfunction
 
 function! CreateNewWindow()
   execute "vsplit" s:drawerName
-  vertical resize 25
+  execute "vertical resize ". g:markdrawerWidth
   set winfixwidth
   setlocal filetype=markdowndrawer
   setlocal buftype=nofile

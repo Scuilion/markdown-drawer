@@ -19,6 +19,7 @@ Simplify navigation in large markdown files.
     let g:markdrawerPrefix = " " 
     let g:markdrawerGoto = "o"
     let g:markdrawerDelete = "D"
+    let g:markdrawerWidth = "25"
     let g:markdrawerPasteBelow = "p"
     let g:markdrawerIncrease = "+"
     let g:markdrawerDecrease = "-"
