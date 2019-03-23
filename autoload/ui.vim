@@ -53,7 +53,7 @@ function! CreateNewWindow()
   execute "vsplit" s:drawerName
   execute "vertical resize ". g:markdrawerWidth
   set winfixwidth
-  setlocal filetype=markdowndrawer
+  setlocal filetype=markdrawer
   setlocal buftype=nofile
 endfunction
 
@@ -97,6 +97,10 @@ function! Delete()
   let l:i = line('.')-1
   let s:dStart = s:outline[i].fileLineNum 
   let s:dEnd = s:fileLength
+
+  syntax clear ToDelete
+  execute 'syntax match ToDelete /\%' . line('.') . 'l.*/'
+
   if len(s:outline) > l:i + 1
     let s:dEnd = s:outline[l:i + 1].fileLineNum - 1
   endif
@@ -110,8 +114,12 @@ function! PasteBelow()
     endif
 
     execute bufwinnr(s:file) . 'wincmd w'    
+
+    " Move lines
     execute s:dStart . "," . s:dEnd . "m " . l:to
+
     call ui#OpenMarkdownDrawer()
+    syntax clear ToDelete
   endif
 endfunction
 

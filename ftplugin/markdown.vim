@@ -29,5 +29,9 @@ if !exists("g:markdrawerDecrease")
     let g:markdrawerDecrease = "-"
 endif
 
+if !exists("g:markdrawerToDeleteColor")
+    let g:markdrawerToDeleteColor = "Red"
+endif
+
 command! MarkDrawer :call ui#OpenMarkdownDrawer()
 command! -nargs=1 MarkDrawerLevelSet :call ui#MarkDrawerLevelSet(<q-args>)
