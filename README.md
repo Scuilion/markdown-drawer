@@ -23,6 +23,7 @@ Simplify navigation in large markdown files.
     let g:markdrawerPasteBelow = "p"
     let g:markdrawerIncrease = "+"
     let g:markdrawerDecrease = "-"
+    let g:markdrawerToDeleteColor = "Red"
     ```
 Map key to open drawer:
 ```
