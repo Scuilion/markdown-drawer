@@ -1,12 +1,12 @@
-let s:drawerName = "__Markdown_Drawer__"
+let s:drawerName = '__Markdown_Drawer__'
 let s:outline = []
-let s:file = ""
+let s:file = ''
 let s:fileLength = 0
 
-function! ui#OpenMarkdownDrawer()
+function! ui#OpenMarkdownDrawer() abort
   write
 
-  let s:file = expand("%:p")
+  let s:file = expand('%:p')
   let s:fileLength = line('$')
 
   let s:outline = levels#MarkdownLevel()
@@ -40,7 +40,7 @@ function! ui#OpenMarkdownDrawer()
     let l:goto = 1
   endif
 
-  execute "normal! " . l:goto . "G"
+  execute 'normal! ' . l:goto . 'G'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerDelete . ' :call Delete()<cr>'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerPasteBelow . ' :call PasteBelow()<cr>'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerIncrease . ' :call Increase()<cr>'
@@ -49,23 +49,23 @@ function! ui#OpenMarkdownDrawer()
 
 endfunction
 
-function! CreateNewWindow()
-  execute "vsplit" s:drawerName
-  execute "vertical resize ". g:markdrawerWidth
+function! CreateNewWindow() abort
+  execute 'vsplit' s:drawerName
+  execute 'vertical resize '. g:markdrawerWidth
   set winfixwidth
   setlocal filetype=markdrawer
   setlocal buftype=nofile
 endfunction
 
 " if the drawer is already opened
-function! ReuseWindow()
+function! ReuseWindow() abort
   if bufwinnr(s:drawerName) != -1
     return 1
   endif
   return 0
 endfunction
 
-function! CreateTree()
+function! CreateTree() abort
   let l:list = []
   for i in s:outline
     call add(l:list, i.header)
@@ -74,7 +74,7 @@ function! CreateTree()
 endfunction
 
 " refresh the tree after setting a new level
-function! ui#MarkDrawerLevelSet(args) 
+function! ui#MarkDrawerLevelSet(args) abort
   if a:args =~# '[^0-9]'
      echom 'Not a number: ' . a:args
      return
@@ -86,14 +86,14 @@ endfunction
 
 " Finds the where to place cursor base off the outline 
 " and returns that line number
-function! GoTo()
+function! GoTo() abort
   let l = s:outline[line('.') - 1].fileLineNum
   execute bufwinnr(s:file) . 'wincmd w'
-  execute "normal! " . l . "G"
+  execute 'normal! ' . l . 'G'
   return l
 endfunction
 
-function! Delete()
+function! Delete() abort
   let l:i = line('.')-1
   let s:dStart = s:outline[i].fileLineNum 
   let s:dEnd = s:fileLength
@@ -106,8 +106,8 @@ function! Delete()
   endif
 endfunction
 
-function! PasteBelow()
-  if exists("s:dStart") && exists("s:dEnd")
+function! PasteBelow() abort
+  if exists('s:dStart') && exists('s:dEnd')
     let l:to = s:fileLength
     if len(s:outline) > line('.')
       let l:to = s:outline[line('.')].fileLineNum - 1
@@ -116,25 +116,25 @@ function! PasteBelow()
     execute bufwinnr(s:file) . 'wincmd w'    
 
     " Move lines
-    execute s:dStart . "," . s:dEnd . "m " . l:to
+    execute s:dStart . ',' . s:dEnd . 'm ' . l:to
 
     call ui#OpenMarkdownDrawer()
     syntax clear ToDelete
   endif
 endfunction
 
-function! Decrease() 
+function! Decrease() abort
   let l:l =  GoTo()
   if matchend(getline(l:l), '\m\C^#\+') < 6
-    execute "normal! I#"
+    execute 'normal! I#'
   endif
   call ui#OpenMarkdownDrawer()
 endfunction
 
-function! Increase() 
+function! Increase() abort
   let l:l =  GoTo()
   if matchend(getline(l:l), '\m\C^#\+') > 0
-    execute "s/^#//"
+    execute 's/^#//'
   endif
   call ui#OpenMarkdownDrawer()
 endfunction

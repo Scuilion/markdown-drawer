@@ -1,6 +1,6 @@
 let s:is = 0
 
-function! levels#MarkdownLevel()
+function! levels#MarkdownLevel() abort
   let l:outline = []
   let l:i = 1
   while i <= line('$')
@@ -22,7 +22,7 @@ function! levels#MarkdownLevel()
   return l:outline
 endfunction
 
-function! HeaderName(line, divide)
+function! HeaderName(line, divide) abort
   let l:h = strcharpart(a:line, a:divide + 1)
   if match('\m\C^\s+$', h) >= 0
     let l:h = '<no header>'
@@ -30,7 +30,7 @@ function! HeaderName(line, divide)
   return repeat(g:markdrawerPrefix, a:divide - 1) . h
 endfunction
 
-function! IsFenced(line)
+function! IsFenced(line) abort
   let l:fen = matchstr(a:line, '\m\C^\s*`\{3}')
   if !empty(l:fen) && s:is == 0
     let s:is = 1
@@ -40,7 +40,7 @@ function! IsFenced(line)
   return s:is
 endfunction
 
-function! Header(outline, line, lNum) 
+function! Header(outline, line, lNum) abort
   let l:hCount = matchend(a:line, '\m\C^#\+')
   let l:max_levels = get(g:, 'markdown_drawer_max_levels', 6)
 

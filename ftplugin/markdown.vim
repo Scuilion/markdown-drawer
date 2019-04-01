@@ -1,36 +1,36 @@
 " Maintainer:   Kevin O'Neal oneal.kevin@gmail.com
 " Version:      0.1
 
-if !exists("g:markdrawerPrefix")
-    let g:markdrawerPrefix = " "
+if !exists('g:markdrawerPrefix')
+    let g:markdrawerPrefix = ' '
 endif
 
-if !exists("g:markdrawerGoto")
-    let g:markdrawerGoto = "o"
+if !exists('g:markdrawerGoto')
+    let g:markdrawerGoto = 'o'
 endif
 
-if !exists("g:markdrawerDelete")
-    let g:markdrawerDelete = "D"
+if !exists('g:markdrawerDelete')
+    let g:markdrawerDelete = 'D'
 endif
 
-if !exists("g:markdrawerWidth")
-    let g:markdrawerWidth = "25"
+if !exists('g:markdrawerWidth')
+    let g:markdrawerWidth = '25'
 endif
 
-if !exists("g:markdrawerPasteBelow")
-    let g:markdrawerPasteBelow = "p"
+if !exists('g:markdrawerPasteBelow')
+    let g:markdrawerPasteBelow = 'p'
 endif
 
-if !exists("g:markdrawerIncrease")
-    let g:markdrawerIncrease = "+"
+if !exists('g:markdrawerIncrease')
+    let g:markdrawerIncrease = '+'
 endif
 
-if !exists("g:markdrawerDecrease")
-    let g:markdrawerDecrease = "-"
+if !exists('g:markdrawerDecrease')
+    let g:markdrawerDecrease = '-'
 endif
 
-if !exists("g:markdrawerToDeleteColor")
-    let g:markdrawerToDeleteColor = "Red"
+if !exists('g:markdrawerToDeleteColor')
+    let g:markdrawerToDeleteColor = 'Red'
 endif
 
 command! MarkDrawer :call ui#OpenMarkdownDrawer()
