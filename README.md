@@ -16,14 +16,14 @@ Simplify navigation in large markdown files.
 ### Basic Options
 * Change the default mappings
     ```vim
-    let g:markdrawerPrefix = " " 
-    let g:markdrawerGoto = "o"
+    let g:markdrawer_prefix = " " 
+    let g:markdrawer_goto = "o"
     let g:markdrawerDelete = "D"
-    let g:markdrawerWidth = "25"
-    let g:markdrawerPasteBelow = "p"
-    let g:markdrawerIncrease = "+"
-    let g:markdrawerDecrease = "-"
-    let g:markdrawerToDeleteColor = "Red"
+    let g:markdrawer_width = "25"
+    let g:markdrawer_paste_below = "p"
+    let g:markdrawer_increase = "+"
+    let g:markdrawer_decrease = "-"
+    let g:markdrawer_to_delete_color = "Red"
     ```
 Map key to open drawer:
 ```

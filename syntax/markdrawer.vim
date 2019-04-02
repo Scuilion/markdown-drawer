@@ -4,4 +4,4 @@ endif
 
 let b:current_syntax = 'markdrawer'
 
-execute 'highlight ToDelete ctermfg=' . g:markdrawerToDeleteColor 
+execute 'highlight ToDelete ctermfg=' . g:markdrawer_to_delete_color 

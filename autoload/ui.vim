@@ -42,16 +42,16 @@ function! ui#OpenMarkdownDrawer() abort
 
   execute 'normal! ' . l:goto . 'G'
   execute 'nnoremap <buffer> <silent> '. g:markdrawerDelete . ' :call Delete()<cr>'
-  execute 'nnoremap <buffer> <silent> '. g:markdrawerPasteBelow . ' :call PasteBelow()<cr>'
-  execute 'nnoremap <buffer> <silent> '. g:markdrawerIncrease . ' :call Increase()<cr>'
-  execute 'nnoremap <buffer> <silent> '. g:markdrawerDecrease . ' :call Decrease()<cr>'
-  execute 'nnoremap <buffer> <silent> '. g:markdrawerGoto . ' :call GoTo()<cr>'
+  execute 'nnoremap <buffer> <silent> '. g:markdrawer_paste_below . ' :call PasteBelow()<cr>'
+  execute 'nnoremap <buffer> <silent> '. g:markdrawer_increase . ' :call Increase()<cr>'
+  execute 'nnoremap <buffer> <silent> '. g:markdrawer_decrease . ' :call Decrease()<cr>'
+  execute 'nnoremap <buffer> <silent> '. g:markdrawer_goto . ' :call GoTo()<cr>'
 
 endfunction
 
 function! CreateNewWindow() abort
   execute 'vsplit' s:drawerName
-  execute 'vertical resize '. g:markdrawerWidth
+  execute 'vertical resize '. g:markdrawer_width
   set winfixwidth
   setlocal filetype=markdrawer
   setlocal buftype=nofile

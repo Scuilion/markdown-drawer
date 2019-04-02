@@ -27,7 +27,7 @@ function! HeaderName(line, divide) abort
   if match('\m\C^\s+$', h) >= 0
     let l:h = '<no header>'
   endif
-  return repeat(g:markdrawerPrefix, a:divide - 1) . h
+  return repeat(g:markdrawer_prefix, a:divide - 1) . h
 endfunction
 
 function! IsFenced(line) abort
