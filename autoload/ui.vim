@@ -66,7 +66,11 @@ endfunction
 function! CreateTree() abort
   let l:list = []
   for i in s:outline
-    let l:h = repeat(g:markdrawer_prefix, i.level) . i.header
+    let l:h = repeat(g:markdrawer_prefix, i.level - 1) 
+    if exists('g:markdrawer_toc') 
+      let l:h = l:h . i.index . '. '
+    endif
+    let l:h = l:h . i.header
     call add(l:list, l:h)
   endfor
   return l:list
@@ -78,7 +82,7 @@ function! ui#MarkDrawerLevelSet(args) abort
      echom 'Not a number: ' . a:args
      return
   endif
-  let g:markdown_drawer_max_levels=a:args
+  let g:markdrawer_drawer_max_levels=a:args
   call GoTo()
   call ui#OpenMarkdownDrawer()
 endfunction

@@ -4,26 +4,56 @@ Given markdown (simple file):
   # first
   ## second
 
+Execute:
+  unlet g:markdrawer_toc 
+
 Do (open the drawer):
   \md
 
 Expect (simple tree): 
-   first
-    second
+  first
+   second
 
 Given markdown (simple file):
-  #### first
+  # first
   ## second
+  # third
+  ## fourth
+  ### fifth
 
-Do (pressing '+' remove a '#'):
+Execute:
+  let g:markdrawer_toc = 'full_index'
+
+Do (open the drawer):
   \md
-  +
 
-Expect (the drawer has been refreshed): 
-     first
-    second
+Expect (outline should be full indexed): 
+  1. first
+   1. second
+  2. third
+   2. fourth
+    1. fifth
 
+Given markdown (simple file):
+  # first
+  ## second
+  ## thrid
+  # forth
+  ## fifth
+  ### sixth
+  ## seventh
 
+Execute:
+  let g:markdrawer_toc = 'index'
 
+Do (open the drawer):
+  \md
 
-
+Expect (outline should be full indexed): 
+  1. first
+   1. second
+   2. thrid
+  2. forth
+   1. fifth
+    1. sixth
+   2. seventh

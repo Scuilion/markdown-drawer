@@ -1,12 +1,49 @@
 Given markdown (a simple markdown file):
-  # Main Title
-      something
-  ### First Sub
-      else
-      multi
-  #### Second Second
+  # first
+  ## second
+  # third
+  ## fourth
+  ### fifth
 
-Execute (MarkdownLevel):
+Execute (do a full index):
+  let g:markdrawer_toc = 'full_index'
   let actual = levels#MarkdownLevel()
-  Assert len(actual) == 3
+  Assert len(actual) == 5
+  Assert actual[0].index == 1
+  Assert actual[1].index == 1
+  Assert actual[2].index == 2
+  Assert actual[3].index == 2
+  Assert actual[4].index == 1
+  "1. first
+  " 1. second
+  "2. third
+  " 2. forth
+  "  1. fifth
 
+Given markdown (a simple markdown file):
+  # first
+  ## second
+  ## thrid
+  # forth
+  ## fifth
+  ### sixth
+  ## seventh
+
+Execute (do a relative index):
+  let g:markdrawer_toc = 'index'
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 7
+  Assert actual[0].index == 1
+  Assert actual[1].index == 1
+  Assert actual[2].index == 2
+  Assert actual[3].index == 2
+  Assert actual[4].index == 1
+  Assert actual[5].index == 1
+  Assert actual[6].index == 2
+  "1. first
+  " 1. second
+  " 2. thrid
+  "2. forth
+  " 1. fifth
+  "  1. sixth
+  " 2. seventh

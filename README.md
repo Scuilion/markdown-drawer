@@ -1,4 +1,4 @@
-### markdown-drawer Beta
+### markdown-drawer - Beta
 Simplify navigation in large markdown files.
 
 ### Demo
@@ -13,26 +13,29 @@ Simplify navigation in large markdown files.
 * `-` decrease header size (adds `#`).
 
 ### Basic Options
-* Change the default mappings
-    ```vim
-    let g:markdrawer_prefix = " " 
-    let g:markdrawer_goto = "o"
-    let g:markdrawerDelete = "D"
-    let g:markdrawer_width = "25"
-    let g:markdrawer_paste_below = "p"
-    let g:markdrawer_increase = "+"
-    let g:markdrawer_decrease = "-"
-    let g:markdrawer_to_delete_color = "Red"
-    ```
+```vim
+let g:markdrawer_prefix = " " 
+let g:markdrawer_goto = "o"
+let g:markdrawerDelete = "D"
+let g:markdrawer_width = "25"
+let g:markdrawer_paste_below = "p"
+let g:markdrawer_increase = "+"
+let g:markdrawer_decrease = "-"
+let g:markdrawer_to_delete_color = "Red"
+```
+
+### Effect Drawer Appearance
+```vim
+let g:markdrawer_drawer_max_levels = 4 " max levels to display
+let g:markdrawer_toc = 'index' " displays as a TOC
+let g:markdrawer_toc = 'full_index' " displays as a TOC, no index reset
+```
+
+### Mapping Recommendations
 Map key to open drawer:
 ```
 nnoremap <Leader>md :MarkDrawer<cr>
 ```
-
-* Set the maximum number of levels to display:
-    ```vim
-    let g:markdown_drawer_max_levels = 4
-    ```
 
 ### Commands
 

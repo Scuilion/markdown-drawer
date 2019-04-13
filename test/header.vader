@@ -18,7 +18,5 @@ Execute(crammed together) :
 
 Execute(no match found) :
   let actual = matchlist(' blah', pattern)
-  Log actual
-  AssertEqual actual[1], '###'
-  AssertEqual actual[2], 'third'
+  Assert len(actual) == 0
 

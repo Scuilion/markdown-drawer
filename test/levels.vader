@@ -67,9 +67,9 @@ Given markdown (two levels):
   ## second
 
 Execute (set header level to one):
-  let g:markdown_drawer_max_levels=1
+  let g:markdrawer_drawer_max_levels=1
   let actual = levels#MarkdownLevel()
-  unlet g:markdown_drawer_max_levels
+  unlet g:markdrawer_drawer_max_levels
   Assert len(actual) == 1
   Assert actual[0].header == 'first'
 
