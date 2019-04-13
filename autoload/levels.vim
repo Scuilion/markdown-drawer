@@ -22,12 +22,12 @@ function! levels#MarkdownLevel() abort
   return l:outline
 endfunction
 
-function! HeaderName(line, divide) abort
-  let l:h = strcharpart(a:line, a:divide + 1)
-  if match('\m\C^\s+$', h) >= 0
+function! HeaderName(line) abort
+  let l:h = a:line
+  if len(a:line) == 0
     let l:h = '<no header>'
   endif
-  return repeat(g:markdrawer_prefix, a:divide - 1) . h
+  return l:h
 endfunction
 
 function! IsFenced(line) abort
@@ -41,10 +41,11 @@ function! IsFenced(line) abort
 endfunction
 
 function! Header(outline, line, lNum) abort
-  let l:hCount = matchend(a:line, '\m\C^#\+')
-  let l:max_levels = get(g:, 'markdown_drawer_max_levels', 6)
+  let l:pattern = '\v(#+)\s*(.*)'
+  let l:matches = matchlist(a:line, l:pattern)
 
-  if l:hCount > 0 && l:hCount <= l:max_levels
-    call add(a:outline, {'fileLineNum': a:lNum, 'active': 0, 'header':  HeaderName(a:line, l:hCount) })
+  let l:max_levels = get(g:, 'markdown_drawer_max_levels', 6)
+  if len(l:matches) > 0 && len(l:matches[1]) <= l:max_levels
+    call add(a:outline, {'fileLineNum': a:lNum, 'active': 0, 'level': len(l:matches[1]), 'header':  HeaderName(l:matches[2]) })
   endif
 endfunction

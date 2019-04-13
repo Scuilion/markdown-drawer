@@ -48,7 +48,7 @@ Given markdown (a mardown file with missing title text):
 
 Execute (default header will be substituted):
   let actual = levels#MarkdownLevel()
-  Assert actual[0].header == '  <no header>'
+  Assert actual[0].header == '<no header>'
 
 Given markdown (an empty file):
 Execute (empty file does not blow up):
@@ -69,5 +69,18 @@ Given markdown (two levels):
 Execute (set header level to one):
   let g:markdown_drawer_max_levels=1
   let actual = levels#MarkdownLevel()
+  unlet g:markdown_drawer_max_levels
   Assert len(actual) == 1
+  Assert actual[0].header == 'first'
+
+Given markdown (simple):
+  #first
+
+Execute (all fields of 'Level' object should be complete):
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 1
+  AssertEqual actual[0].active, 1
+  AssertEqual actual[0].level, 1
+  AssertEqual actual[0].header, 'first'
+  AssertEqual actual[0].fileLineNum, 1
 

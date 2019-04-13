@@ -1,0 +1,24 @@
+Before:
+  let pattern = '\v(#+)\s*(.*)'
+
+Execute(simple header) :
+  let actual = matchlist('# first', pattern)
+  AssertEqual actual[1], '#'
+  AssertEqual actual[2], 'first'
+
+Execute(space in front ) :
+  let actual = matchlist(' ## second', pattern)
+  AssertEqual actual[1], '##'
+  AssertEqual actual[2], 'second'
+
+Execute(crammed together) :
+  let actual = matchlist(' ###third', pattern)
+  AssertEqual actual[1], '###'
+  AssertEqual actual[2], 'third'
+
+Execute(no match found) :
+  let actual = matchlist(' blah', pattern)
+  Log actual
+  AssertEqual actual[1], '###'
+  AssertEqual actual[2], 'third'
+

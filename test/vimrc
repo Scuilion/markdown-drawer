@@ -2,5 +2,6 @@ filetype off
 set nomodeline
 set runtimepath+=~/.vim/bundle/vader.vim
 set runtimepath+=~/.vim/bundle/markdown-drawer
+nnoremap <Leader>md :MarkDrawer<cr>
 filetype plugin indent on
 syntax enable

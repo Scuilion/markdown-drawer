@@ -1,0 +1,29 @@
+"TODO: add test for empty vader buffer
+
+Given markdown (simple file):
+  # first
+  ## second
+
+Do (open the drawer):
+  \md
+
+Expect (simple tree): 
+   first
+    second
+
+Given markdown (simple file):
+  #### first
+  ## second
+
+Do (pressing '+' remove a '#'):
+  \md
+  +
+
+Expect (the drawer has been refreshed): 
+     first
+    second
+
+
+
+
+

@@ -1,0 +1,12 @@
+Given markdown (a simple markdown file):
+  # Main Title
+      something
+  ### First Sub
+      else
+      multi
+  #### Second Second
+
+Execute (MarkdownLevel):
+  let actual = levels#MarkdownLevel()
+  Assert len(actual) == 3
+

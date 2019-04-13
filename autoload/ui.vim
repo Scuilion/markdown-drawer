@@ -4,8 +4,6 @@ let s:file = ''
 let s:fileLength = 0
 
 function! ui#OpenMarkdownDrawer() abort
-  write
-
   let s:file = expand('%:p')
   let s:fileLength = line('$')
 
@@ -68,7 +66,8 @@ endfunction
 function! CreateTree() abort
   let l:list = []
   for i in s:outline
-    call add(l:list, i.header)
+    let l:h = repeat(g:markdrawer_prefix, i.level) . i.header
+    call add(l:list, l:h)
   endfor
   return l:list
 endfunction
