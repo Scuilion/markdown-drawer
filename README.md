@@ -5,8 +5,7 @@ Simplify navigation in large markdown files.
 
 ![Markdrawer Demo](https://github.com/scuilion/markdown-drawer/raw/master/demo.gif)
 
-### Basic Usage
-* Open drawer `<leader>md`
+### Keys Mappings
 * `o` navigate to header in file.
 * `D` mark section for cut (no effect till paste).
 * `p` paste previously marked section below current.
