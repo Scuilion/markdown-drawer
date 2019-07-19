@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+vim --cmd 'profile start profile.result' \
+    --cmd 'profile! file *ftplugin/markdown.vim' \
+    -c 'profdel file *ftplugin/markdown.vim' \
+    test/simple.md

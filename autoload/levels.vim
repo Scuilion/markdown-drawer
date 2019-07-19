@@ -5,7 +5,7 @@ function! levels#MarkdownLevel() abort
   let l:i = 1
   while i <= line('$')
     let line = getline(i)
-    if IsFenced(line) == 0
+    if !IsFenced(i)
       call Header(l:outline, line, i) 
     endif
     let l:i += 1
@@ -41,7 +41,7 @@ function! levels#MarkdownLevel() abort
     endif
   endif
 
-    " TODO: Should be able to do this simply enough in the Header function
+  " TODO: Should be able to do this simply enough in the Header function
   let l:i = len(l:outline) - 1
   while i > -1
     if line('.') >= l:outline[i].fileLineNum
@@ -62,13 +62,13 @@ function! HeaderName(line) abort
 endfunction
 
 function! IsFenced(line) abort
-  let l:fen = matchstr(a:line, '\m\C^\s*`\{3}')
-  if !empty(l:fen) && s:is == 0
-    let s:is = 1
-  elseif !empty(l:fen) && s:is == 1
-    let s:is = 0
-  endif
-  return s:is
+  let syntaxGroup = map(synstack(a:line, 1), 'synIDattr(v:val, "name")')
+  for value in syntaxGroup
+    if value =~# '\vmarkdown(Code|Highlight)'
+        return 1
+    endif
+  endfor
+  return 0
 endfunction
 
 " TODO: don't pass in outline
