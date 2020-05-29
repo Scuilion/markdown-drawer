@@ -73,7 +73,7 @@ endfunction
 
 " TODO: don't pass in outline
 function! Header(outline, line, lNum) abort
-  let l:pattern = '\v(#+)\s*(.*)'
+  let l:pattern = '\v^\s*(#+)\s*(.*)'
   let l:matches = matchlist(a:line, l:pattern)
 
   let l:max_levels = get(g:, 'markdrawer_drawer_max_levels', 6)

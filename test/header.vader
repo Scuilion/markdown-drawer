@@ -1,22 +1,33 @@
 Before:
-  let pattern = '\v(#+)\s*(.*)'
+  let pattern = '\v^\s*(#+)\s*(.*)'
 
 Execute(simple header) :
   let actual = matchlist('# first', pattern)
-  AssertEqual actual[1], '#'
-  AssertEqual actual[2], 'first'
+  Assert len(actual) > 0, 'no matches found'
+  AssertEqual '#', actual[1]
+  AssertEqual 'first', actual[2]
 
-Execute(space in front ) :
+Execute(suport for space in front ) :
   let actual = matchlist(' ## second', pattern)
-  AssertEqual actual[1], '##'
-  AssertEqual actual[2], 'second'
+  Assert len(actual) > 0, 'no matches found'
+  AssertEqual '##', actual[1]
+  AssertEqual 'second', actual[2]
 
 Execute(crammed together) :
-  let actual = matchlist(' ###third', pattern)
-  AssertEqual actual[1], '###'
-  AssertEqual actual[2], 'third'
+  let actual = matchlist('###third', pattern)
+  Assert len(actual) > 0, 'no matches found'
+  AssertEqual '###', actual[1]
+  AssertEqual 'third', actual[2]
 
 Execute(no match found) :
   let actual = matchlist(' blah', pattern)
-  Assert len(actual) == 0
+  Assert len(actual) == 0, 'should be empty'
+
+Execute(hash not in front) :
+  let actual = matchlist('scary #', pattern)
+  Assert len(actual) == 0, 'should be empty'
+
+Execute(escaped hash) :
+  let actual = matchlist('`#`', pattern)
+  Assert len(actual) == 0, 'should be empty'
 

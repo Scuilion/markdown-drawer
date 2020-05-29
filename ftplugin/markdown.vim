@@ -1,5 +1,5 @@
 " Maintainer:   Kevin O'Neal oneal.kevin@gmail.com
-" Version:      0.1
+" Version:      0.3
 
 if !exists('g:markdrawer_prefix')
     let g:markdrawer_prefix = ' '
