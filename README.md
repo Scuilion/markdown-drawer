@@ -1,4 +1,4 @@
-### markdown-drawer - Beta
+# markdown-drawer
 Simplify navigation in large markdown files.
 
 ### Demo
