@@ -34,4 +34,5 @@ if !exists('g:markdrawer_to_delete_color')
 endif
 
 command! MarkDrawer :call ui#OpenMarkdownDrawer()
+command! MarkDrawerClose :call ui#OpenMarkdownClose()
 command! -nargs=1 MarkDrawerLevelSet :call ui#MarkDrawerLevelSet(<q-args>)
