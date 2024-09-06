@@ -4,13 +4,7 @@ let s:file = ''
 let s:fileLength = 0
 
 function! ui#CloseMarkdownDrawer() abort
-  if !ReuseWindow()
-    " close existing terminal buffer with the same name
-    let ex_term_buf_no = bufnr(s:drawerName)
-    if ex_term_buf_no > -1
-      execute 'bwipeout! ' . ex_term_buf_no
-    endif
-  endif
+  execute ':bdelete! ' . bufnr(s:drawerName)
 endfunction
 
 function! ui#OpenMarkdownDrawer() abort
