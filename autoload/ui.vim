@@ -3,6 +3,10 @@ let s:outline = []
 let s:file = ''
 let s:fileLength = 0
 
+function! ui#CloseMarkdownDrawer() abort
+  execute ':bdelete! ' . bufnr(s:drawerName)
+endfunction
+
 function! ui#OpenMarkdownDrawer() abort
   let s:file = expand('%:p')
   let s:fileLength = line('$')
